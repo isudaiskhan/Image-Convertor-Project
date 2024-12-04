@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Header from "./Components/Header/Header";
+import ImageUploader from "./Components/ImageUploader/ImageUploader";
+import Converter from "./Components/Converter/Converter";
+import Footer from "./Components/Footer/Footer";
+import Navbar from "./Components/Navbar/Navbar";
 
-function App() {
+const App = () => {
+  const [uploadedFile, setUploadedFile] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <Navbar />
+    <div className="min-h-screen text-white flex flex-col items-center">
+      <Header />
+      <div className="w-full mx-auto">
+        <ImageUploader setUploadedFile={setUploadedFile} />
+        {uploadedFile && <Converter uploadedFile={uploadedFile} />}
+      </div>
+      <ToastContainer />
     </div>
+    <Footer />
+    </>
   );
-}
+};
 
 export default App;
